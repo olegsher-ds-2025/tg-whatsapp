@@ -11,11 +11,11 @@ services:
     env_file:
       - .env
     ports:
-      - "8080:8080"
+      - "9080:9080"
     volumes:
       - ./logs/telegram:/app/logs
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9080/health')"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -26,30 +26,30 @@ services:
         max-size: "10m"
         max-file: "3"
 
-  whatsapp-proxy:
-    build:
-      context: ./whatsapp
-      dockerfile: Dockerfile
-    image: whatsapp-proxy:latest
-    container_name: whatsapp-proxy
-    restart: unless-stopped
-    depends_on:
-      - telegram-proxy        # so alerts can reach it once it's up
-    env_file:
-      - .env
-    ports:
-      - "8081:8081"
-    volumes:
-      - ./logs/whatsapp:/app/logs
-      - ./whatsapp-auth:/app/auth   # persists the WhatsApp session so you don't re-scan the QR on every restart
-    healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://localhost:8081/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+  # whatsapp-proxy:
+  #   build:
+  #     context: ./whatsapp
+  #     dockerfile: Dockerfile
+  #   image: whatsapp-proxy:latest
+  #   container_name: whatsapp-proxy
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - telegram-proxy        # so alerts can reach it once it's up
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "9081:9081"
+  #   volumes:
+  #     - ./logs/whatsapp:/app/logs
+  #     - ./whatsapp-auth:/app/auth   # persists the WhatsApp session so you don't re-scan the QR on every restart
+  #   healthcheck:
+  #     test: ["CMD", "node", "-e", "fetch('http://localhost:9081/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+  #     interval: 30s
+  #     timeout: 5s
+  #     retries: 3
+  #     start_period: 15s
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "3"

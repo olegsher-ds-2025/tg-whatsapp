@@ -1,6 +1,6 @@
 # Telegram Proxy API
 
-Base URL: `http://<jetson-ip>:8080`
+Base URL: `http://<jetson-ip>:9080`
 
 ## Authentication
 
@@ -45,7 +45,7 @@ X-API-Key: <your-api-key>      (if configured)
 
 **Example**
 ```bash
-curl -X POST http://10.0.0.X:8080/send \
+curl -X POST http://10.0.0.X:9080/send \
   -H "Content-Type: application/json" \
   -H "X-API-Key: changeme-shared-secret" \
   -d '{"chat_id": "-1001234567890", "text": "Deploy finished ✅"}'
@@ -94,7 +94,7 @@ Generic passthrough to **any** [Telegram Bot API method](https://core.telegram.o
 
 **Example — get chat info**
 ```bash
-curl -X POST http://10.0.0.X:8080/call \
+curl -X POST http://10.0.0.X:9080/call \
   -H "Content-Type: application/json" \
   -H "X-API-Key: changeme-shared-secret" \
   -d '{"method": "getChat", "params": {"chat_id": "-1001234567890"}}'
@@ -102,7 +102,7 @@ curl -X POST http://10.0.0.X:8080/call \
 
 **Example — pin a message**
 ```bash
-curl -X POST http://10.0.0.X:8080/call \
+curl -X POST http://10.0.0.X:9080/call \
   -H "Content-Type: application/json" \
   -H "X-API-Key: changeme-shared-secret" \
   -d '{"method": "pinChatMessage", "params": {"chat_id": "-1001234567890", "message_id": 42}}'

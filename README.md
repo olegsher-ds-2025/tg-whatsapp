@@ -20,7 +20,7 @@ docker compose up -d --build
 
 Then:
 - Telegram: bot must already be added to the target group/channel.
-- WhatsApp: `curl http://<host>:8081/qr -o qr.png` and scan it from WhatsApp → Linked Devices.
+- WhatsApp: `curl http://<host>:9081/qr -o qr.png` and scan it from WhatsApp → Linked Devices.
 
 ## Notes
 
